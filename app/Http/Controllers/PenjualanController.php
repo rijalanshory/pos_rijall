@@ -68,7 +68,8 @@ class PenjualanController extends Controller
             ],
             [
                 'total_pembayaran'  => 0,
-                'metode_pembayaran' => 'CASH'
+                'metode_pembayaran' => 'CASH',
+                'payment_method'    => 'CASH'
             ]
         );
 
@@ -130,7 +131,9 @@ class PenjualanController extends Controller
             // 🔄 Hitung ulang total pembayaran di backend demi keamanan
             $total = $penjualan->itemPenjualan()->sum('subtotal');
 
+            // Update status dan metode pembayaran ke database (mendukung nama kolom Indonesia & Inggris)
             $penjualan->update([
+                'payment_method'    => $request->payment_method,
                 'metode_pembayaran' => $request->payment_method,
                 'total_pembayaran'  => $total,
                 'status'            => 'COMPLETED',

@@ -22,8 +22,6 @@ class UpdateRequest extends FormRequest
 
             'name'             => 'required|string|max:255',
 
-            'category_id'      => 'required|exists:categories,id',
-
             'purchase_price'   => 'required|integer|min:0',
 
             'selling_price'    => 'required|integer|min:0',
@@ -48,9 +46,6 @@ class UpdateRequest extends FormRequest
             'foto.max'                => 'Ukuran gambar maksimal 2 MB.',
 
             'name.required'           => 'Nama produk wajib diisi.',
-
-            'category_id.required'    => 'Jenis produk wajib dipilih.',
-            'category_id.exists'      => 'Jenis produk tidak valid.',
 
             'purchase_price.required' => 'Harga beli wajib diisi.',
             'purchase_price.integer'  => 'Harga beli harus berupa angka.',

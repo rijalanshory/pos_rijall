@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kelola Produk - Vlyhadi')
+@section('title', 'Kelola Produk - Rijal')
 
 @section('content')
 
@@ -9,9 +9,9 @@
 <style>
     /* Color Palette & Variables */
     :root {
-  --green-main:#22c55e;
-    --green-dark:#15803d;
-    --bg-slate:#f8fafc;
+        --green-main: #22c55e;
+        --green-dark: #15803d;
+        --bg-slate: #f8fafc;
     }
 
     body {
@@ -21,14 +21,14 @@
 
     /* Gradient Header Banner */
     .banner-green-gradient {
-    background: linear-gradient(
-        135deg,
-        #020617 0%,
-        #064e3b 55%,
-        #22c55e 100%
-    ) !important;
-    color: #ffffff !important;
-}
+        background: linear-gradient(
+            135deg,
+            #020617 0%,
+            #064e3b 55%,
+            #22c55e 100%
+        ) !important;
+        color: #ffffff !important;
+    }
 
     /* Custom Card & Table Styling */
     .custom-card {
@@ -67,12 +67,12 @@
         transition: background-color 0.15s ease;
     }
 
-        .custom-table tbody tr:hover {
-        background-color:#f0fdf4 !important;
+    .custom-table tbody tr:hover {
+        background-color: #f0fdf4 !important;
     }
 
-        .custom-table tbody tr:hover .product-name-text {
-        color:#15803d !important;
+    .custom-table tbody tr:hover .product-name-text {
+        color: #15803d !important;
     }
 
     /* Search Box & Inputs */
@@ -83,20 +83,20 @@
     }
 
     .search-box:focus-within .bg-search {
-    background-color:#ffffff !important;
-    border-color:#22c55e !important;
+        background-color: #ffffff !important;
+        border-color: #22c55e !important;
     }
 
     .search-box input:focus {
-    box-shadow:none !important;
-    border-color:#22c55e !important;
+        box-shadow: none !important;
+        border-color: #22c55e !important;
     }
 
     /* Badges & Soft Color Elements */
     .badge-soft-green {
-    background-color:#dcfce7 !important;
-    color:#15803d !important;
-    border:1px solid #a7f3d0 !important;
+        background-color: #dcfce7 !important;
+        color: #15803d !important;
+        border: 1px solid #a7f3d0 !important;
     }
 
     .badge-soft-amber {
@@ -148,7 +148,7 @@
         transform: scale(1.08);
     }
 
-    /* Thumbnail styling */
+    /* Thumbnail Styling */
     .product-thumb {
         width: 44px;
         height: 44px;
@@ -156,118 +156,13 @@
         border-radius: 10px;
     }
 
-   .product-thumb-placeholder {
-    width:44px;
-    height:44px;
-    border-radius:10px;
-    background-color:#dcfce7;
-    color:#15803d;
-}
-
-/* PRODUCT CARD GRID */
-.product-card{
-    background:white;
-    border-radius:20px;
-    border:1px solid #e2e8f0;
-    overflow:hidden;
-    transition:.3s;
-}
-
-.product-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-}
-
-.product-image-box{
-    height:220px;
-    background:#f8fafc;
-    position:relative;
-}
-
-.product-image{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.no-image{
-    height:220px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:50px;
-    color:#94a3b8;
-}
-
-.stock-badge{
-    position:absolute;
-    top:15px;
-    right:15px;
-    padding:6px 12px;
-    border-radius:50px;
-    font-size:12px;
-    font-weight:700;
-}
-
-.success{
-    background:#dcfce7;
-    color:#15803d;
-}
-
-.warning{
-    background:#fef3c7;
-    color:#b45309;
-}
-
-.danger{
-    background:#fee2e2;
-    color:#dc2626;
-}
-
-.product-title{
-    font-size:18px;
-    font-weight:700;
-}
-
-.category-badge{
-    background:#dcfce7;
-    color:#15803d;
-    padding:5px 12px;
-    border-radius:50px;
-    font-size:12px;
-}
-
-.price{
-    font-size:20px;
-    font-weight:800;
-    color:#15803d;
-}
-
-.btn-card{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:none;
-}
-
-.info{
-    background:#e0f2fe;
-    color:#0369a1;
-}
-
-.edit{
-    background:#fef3c7;
-    color:#d97706;
-}
-
-.delete{
-    background:#fee2e2;
-    color:#dc2626;
-}
-
+    .product-thumb-placeholder {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background-color: #dcfce7;
+        color: #15803d;
+    }
 </style>
 
 <div class="container py-4">
@@ -305,8 +200,7 @@
         <div class="col-6 col-md-3">
             <div class="card stat-card bg-white p-3 shadow-sm">
                 <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle p-3 d-flex align-items-center justify-content-center"
-                    style="background:#dcfce7; color:#15803d; width: 48px; height: 48px;">
+                    <div class="rounded-circle p-3 d-flex align-items-center justify-content-center" style="background:#dcfce7; color:#15803d; width: 48px; height: 48px;">
                         <i class="bi bi-boxes fs-4"></i>
                     </div>
                     <div>
@@ -449,7 +343,7 @@
                             </td>
                             <td>
                                 @if($product->stok > 10)
-                                    <span class="badge badge-soft-emerald px-3 py-1 rounded-pill fw-semibold">
+                                    <span class="badge badge-soft-green px-3 py-1 rounded-pill fw-semibold">
                                         {{ $product->stok }} Pcs
                                     </span>
                                 @elseif($product->stok > 0)
@@ -478,7 +372,7 @@
                                         </a>
                                     @endcan
 
-                                    {{-- DELETE (Panggil Modal Global) --}}
+                                    {{-- DELETE --}}
                                     @can('delete', $product)
                                         <button type="button" 
                                                 class="btn btn-action-delete rounded-circle d-inline-flex align-items-center justify-content-center" 
@@ -525,7 +419,7 @@
 
 </div>
 
-{{-- MODAL GLOBAL KONFIRMASI HAPUS PRODUK (DITARUH DI OUTSIDE TABLE) --}}
+{{-- MODAL GLOBAL KONFIRMASI HAPUS PRODUK --}}
 <div class="modal fade" id="globalDeleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden text-center p-3">
@@ -549,7 +443,7 @@
 </div>
 
 <script>
-    // Trigger Modal Hapus Produk Presisi
+    // Trigger Modal Hapus Produk
     function triggerDeleteModal(deleteUrl, productName) {
         document.getElementById('deleteProductNameText').innerText = `"${productName}"`;
         document.getElementById('globalDeleteForm').action = deleteUrl;

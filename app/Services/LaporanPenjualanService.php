@@ -17,8 +17,8 @@ class LaporanPenjualanService
                 SUM(total_pembayaran) as total_penjualan,
                 SUM(CASE WHEN metode_pembayaran = "CASH" THEN total_pembayaran ELSE 0 END) as total_cash,
                 SUM(CASE WHEN metode_pembayaran != "CASH" THEN total_pembayaran ELSE 0 END) as total_non_tunai
-           ')
-           ->first();
+            ')
+            ->first();
 
         return [
             'total_transaksi' => $data->total_transaksi ?? 0,
@@ -35,7 +35,7 @@ class LaporanPenjualanService
             ->join('produk', 'produk.id', '=', 'item_penjualan.produk_id')
             ->whereDate('penjualan.created_at', Carbon::today())
             ->where('penjualan.status', 'COMPLETED')
-            ->groupBy('produk.id', 'produk.nama')
+            ->groupBy('produk.id', 'produk.nama', 'produk.stok')
             ->select(
                 'produk.nama',
                 'produk.stok',

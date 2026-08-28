@@ -565,7 +565,7 @@ href="{{ route('dashboard') }}">
 
 <div class="navbar-brand-logo">
 
-  <img src="{{ asset('images/vly.png') }}" alt="Logo Vlyhadi" class="w-100 h-100 object-fit-cover">
+
 
 </div>
 
@@ -573,7 +573,7 @@ href="{{ route('dashboard') }}">
 <div>
 
 <span class="brand-title">
-        Vlyhadi
+        Rijal
 </span>
 
 </div>

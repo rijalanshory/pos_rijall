@@ -1,29 +1,20 @@
 @csrf
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-<style>
-        :root {
-    --green-main: #22c55e;
-    --green-dark: #15803d;
-    --green-soft: #dcfce7;
-    --gray-border: #e2e8f0;
 
+<style>
+    :root {
+        --green-main: #22c55e;
+        --green-dark: #15803d;
+        --green-soft: #dcfce7;
+        --gray-border: #e2e8f0;
     }
 
     .form-card-section {
-    background-color: #ffffff;
-    border-radius: 16px;
-    border: 1px solid var(--gray-border);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    overflow:hidden;
-}
+        background-color: #ffffff;
+        border-radius: 16px;
+        border: 1px solid var(--gray-border);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        overflow: hidden;
+    }
 
     .form-label-custom {
         font-weight: 600;
@@ -56,8 +47,8 @@
     }
 
     .form-control-custom:focus {
-    border-color: var(--green-main) !important;
-    box-shadow: 0 0 0 3.5px rgba(34, 197, 94, 0.15) !important;
+        border-color: var(--green-main) !important;
+        box-shadow: 0 0 0 3.5px rgba(34, 197, 94, 0.15) !important;
     }
 
     /* UPLOAD FOTO AREA */
@@ -73,8 +64,8 @@
     }
 
     .file-upload-box:hover {
-    border-color: var(--green-main);
-    background-color: var(--green-soft);
+        border-color: var(--green-main);
+        background-color: var(--green-soft);
     }
 
     .file-upload-box input[type="file"] {
@@ -89,24 +80,20 @@
 
     /* BUTTONS */
     button.btn-gradient-submit {
-    background: linear-gradient(
-        135deg,
-        #15803d,
-        #22c55e
-    );
-    border: none;
-    color: white;
-    padding: 0.7rem 1.8rem;
-    border-radius: 50px;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
-    transition: all 0.2s ease;
+        background: linear-gradient(135deg, #15803d, #22c55e);
+        border: none;
+        color: white;
+        padding: 0.7rem 1.8rem;
+        border-radius: 50px;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+        transition: all 0.2s ease;
     }
 
-.btn-gradient-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
-    color: white;
+    .btn-gradient-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
+        color: white;
     }
 
     a.btn-soft-secondary {
@@ -124,75 +111,6 @@
         background: #e2e8f0;
         color: #334155;
     }
-
-    .category-card{
-    display:block;
-    cursor:pointer;
-}
-
-.category-card input{
-    display:none;
-}
-
-.category-content{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:15px;
-    border:2px solid #e5e7eb;
-    border-radius:16px;
-    background:#fff;
-    transition:.3s;
-}
-
-.category-content:hover{
-    border-color:#22c55e;
-    transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.category-image{
-    width:95px;
-    height:95px;
-    object-fit:cover;
-    border-radius:12px;
-}
-
-.category-text h5{
-    margin:0;
-    font-size:18px;
-    font-weight:700;
-}
-
-.category-text small{
-    color:#64748b;
-}
-
-.check-circle{
-    position:absolute;
-    right:15px;
-    top:15px;
-    width:24px;
-    height:24px;
-    border-radius:50%;
-    border:2px solid #d1d5db;
-}
-
-.category-card input:checked + .category-content{
-    border-color:#22c55e;
-    background:#f0fdf4;
-}
-
-.category-card input:checked + .category-content .check-circle{
-    background:#22c55e;
-    border-color:#22c55e;
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
 </style>
 
 <div class="row g-4">
@@ -223,11 +141,8 @@
                              class="rounded-3 shadow-sm border" 
                              style="width: 120px; height: 120px; object-fit: cover;">
                         <span class="badge position-absolute bottom-0 start-50 translate-middle-x mb-1 px-2 py-1"
-                        style="
-                            font-size: 0.7rem;
-                            background: var(--green-soft);
-                            color: var(--green-dark);">
-                                Preview
+                              style="font-size: 0.7rem; background: var(--green-soft); color: var(--green-dark);">
+                            Preview
                         </span>
                     </div>
                 </div>
@@ -265,74 +180,6 @@
         </div>
     </div>
 
-
-   {{-- KATEGORI PRODUK --}}
-<div class="col-12">
-    <div class="p-4 form-card-section">
-
-        <label class="form-label-custom">
-            Jenis Produk <span class="text-danger">*</span>
-        </label>
-
-        <div class="row g-3">
-
-            @foreach($categories as $category)
-
-                @php
-                    $foto = match(strtolower($category->nama)) {
-                        'makanan' => 'makanan.jpg',
-                        'minuman' => 'minuman.jpg',
-                        'snack' => 'snack.jpg',
-                        'elektronik' => 'elektronik.jpg',
-                        default => 'default.jpg',
-                    };
-                @endphp
-
-                <div class="col-md-6 col-lg-3">
-
-                    <label class="category-card">
-
-                        <input
-                            type="radio"
-                            name="category_id"
-                            value="{{ $category->id }}"
-                            {{ old('category_id', $produk->category_id ?? '') == $category->id ? 'checked' : '' }}
-                        >
-
-                        <div class="category-content">
-
-                            <img
-                                src="{{ asset('images/categories/'.$foto) }}"
-                                class="category-image"
-                            >
-
-                            <div class="category-text">
-                                <h5>{{ $category->nama }}</h5>
-                                <small>{{ $category->deskripsi ?? 'Kategori Produk' }}</small>
-                            </div>
-
-                            <span class="check-circle">
-                                <i class="bi bi-check"></i>
-                            </span>
-
-                        </div>
-
-                    </label>
-
-                </div>
-
-            @endforeach
-
-        </div>
-
-        @error('category_id')
-            <div class="text-danger mt-2">
-                {{ $message }}
-            </div>
-        @enderror
-
-    </div>
-</div>
 
     {{-- HARGA BELI & HARGA JUAL --}}
     <div class="col-md-6">
@@ -425,43 +272,15 @@
                 Satuan <span class="text-danger">*</span>
             </label>
 
-            <select name="satuan"
-        class="form-control form-control-custom"
-        required>
-
-<option value="">Pilih Satuan</option>
-
-<option value="pcs"
-{{ old('satuan',$produk->satuan ?? '')=='pcs'?'selected':'' }}>
-PCS
-</option>
-
-<option value="kg"
-{{ old('satuan',$produk->satuan ?? '')=='kg'?'selected':'' }}>
-Kg
-</option>
-
-<option value="gram"
-{{ old('satuan',$produk->satuan ?? '')=='gram'?'selected':'' }}>
-Gram
-</option>
-
-<option value="liter"
-{{ old('satuan',$produk->satuan ?? '')=='liter'?'selected':'' }}>
-Liter
-</option>
-
-<option value="botol"
-{{ old('satuan',$produk->satuan ?? '')=='botol'?'selected':'' }}>
-Botol
-</option>
-
-<option value="pack"
-{{ old('satuan',$produk->satuan ?? '')=='pack'?'selected':'' }}>
-Pack
-</option>
-
-</select>
+            <select name="satuan" class="form-control form-control-custom" required>
+                <option value="">Pilih Satuan</option>
+                <option value="pcs" {{ old('satuan', $produk->satuan ?? '') == 'pcs' ? 'selected' : '' }}>PCS</option>
+                <option value="kg" {{ old('satuan', $produk->satuan ?? '') == 'kg' ? 'selected' : '' }}>Kg</option>
+                <option value="gram" {{ old('satuan', $produk->satuan ?? '') == 'gram' ? 'selected' : '' }}>Gram</option>
+                <option value="liter" {{ old('satuan', $produk->satuan ?? '') == 'liter' ? 'selected' : '' }}>Liter</option>
+                <option value="botol" {{ old('satuan', $produk->satuan ?? '') == 'botol' ? 'selected' : '' }}>Botol</option>
+                <option value="pack" {{ old('satuan', $produk->satuan ?? '') == 'pack' ? 'selected' : '' }}>Pack</option>
+            </select>
 
         </div>
     </div>
@@ -499,6 +318,7 @@ Pack
         </div>
     </div>
 
+</div>
 
 {{-- TOMBOL AKSES --}}
 <div class="d-flex align-items-center gap-3 mt-4">
@@ -524,12 +344,10 @@ Pack
         const file = input.files[0];
 
         if(file && preview && container && placeholder){
-
-             preview.src = URL.createObjectURL(file);
-             container.style.display = 'block';
-             placeholder.style.display = 'none';
-
-}
+            preview.src = URL.createObjectURL(file);
+            container.style.display = 'block';
+            placeholder.style.display = 'none';
+        }
     }
 
     function hitungskalaku() {
@@ -552,6 +370,5 @@ Pack
         }
     }
 
-    // Jalankan kalkulasi profit awal jika sedang mode edit data
     document.addEventListener('DOMContentLoaded', hitungskalaku);
 </script>

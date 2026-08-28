@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Riwayat Penjualan - Vlyhadi')
+@section('title', 'Riwayat Penjualan - Rijal')
 
 @section('content')
 
@@ -9,11 +9,11 @@
 <style>
     /* Color Palette & Variables */
     :root {
-    --green-main: #22c55e;
-    --green-dark: #15803d;
-    --green-soft: #dcfce7;
-    --bg-slate: #f8fafc;
-}
+        --green-main: #22c55e;
+        --green-dark: #15803d;
+        --green-soft: #dcfce7;
+        --bg-slate: #f8fafc;
+    }
 
     body {
         background-color: var(--bg-slate) !important;
@@ -22,7 +22,7 @@
 
     /* Gradient Header Banner */
     .banner-green-gradient {
-    background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%);
+        background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%);
         color: #ffffff !important;
     }
 
@@ -68,8 +68,8 @@
     }
 
     .custom-table tbody tr:hover .sale-code-text {
-    color: #15803d !important;
-}
+        color: #15803d !important;
+    }
 
     /* Search Box Focus State */
     .bg-search {
@@ -85,10 +85,10 @@
 
     /* Badges Style */
     .badge-soft-green {
-    background-color: #dcfce7 !important;
-    color: #15803d !important;
-    border: 1px solid #bbf7d0 !important;
-}
+        background-color: #dcfce7 !important;
+        color: #15803d !important;
+        border: 1px solid #bbf7d0 !important;
+    }
 
     .badge-soft-emerald {
         background-color: #dcfce7 !important;
@@ -164,6 +164,16 @@
         </div>
     @endif
 
+    {{-- ALERT SUCCESS --}}
+    @if(session('success'))
+        <div class="alert alert-success rounded-3 shadow-sm mb-4 border-0 border-start border-4 border-success">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+                <div>{{ session('success') }}</div>
+            </div>
+        </div>
+    @endif
+
     {{-- HEADER BANNER GRADIENT --}}
     <div class="banner-green-gradient p-4 p-md-5 rounded-4 mb-4 position-relative overflow-hidden shadow-sm">
         <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 position-relative" style="z-index: 1;">
@@ -174,7 +184,6 @@
                 <p class="text-white opacity-75 small mb-0">Pantau transaksi penjualan, metode pembayaran, dan laporan kasir secara real-time.</p>
             </div>
             <div class="d-flex flex-wrap gap-2">
-                {{-- FITUR BARU: TOMBOL CETAK REKAP --}}
                 <button onclick="window.print()" class="btn btn-outline-light rounded-pill px-3 shadow-sm fw-semibold d-inline-flex align-items-center gap-2">
                     <i class="bi bi-printer-fill"></i>
                     <span>Cetak Laporan</span>
@@ -188,13 +197,12 @@
                 </a>
             </div>
         </div>
-        {{-- Decorative Icon Background --}}
         <div class="position-absolute end-0 bottom-0 opacity-25 pe-4 pb-2 d-none d-md-block">
             <i class="bi bi-currency-dollar text-white" style="font-size: 5rem;"></i>
         </div>
     </div>
 
-    {{-- FITUR BARU: STATISTIK RINGKASAN TRANSAKSI --}}
+    {{-- STATISTIK RINGKASAN TRANSAKSI --}}
     <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">
             <div class="card stat-card bg-white p-3 shadow-sm">
@@ -218,7 +226,11 @@
                     </div>
                     <div>
                         <span class="text-muted small d-block">Omset Terlihat</span>
-                        <h5 class="fw-bold mb-0 text-dark">Rp {{ number_format($sales->sum('total_pembayaran'), 0, ',', '.') }}</h5>
+                        <h5 class="fw-bold mb-0 text-dark">
+                            Rp {{ number_format($sales->sum(function($item) {
+                                return $item->status === 'COMPLETED' ? $item->total_pembayaran : $item->itemPenjualan->sum('subtotal');
+                            }), 0, ',', '.') }}
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -231,7 +243,12 @@
                     </div>
                     <div>
                         <span class="text-muted small d-block">Digital (QRIS/Trf)</span>
-                        <h5 class="fw-bold mb-0 text-dark">{{ $sales->whereIn('metode_pembayaran', ['qris', 'transfer', 'QRIS', 'TRANSFER'])->count() }}</h5>
+                        <h5 class="fw-bold mb-0 text-dark">
+                            {{ $sales->filter(function($s) {
+                                $m = strtolower($s->metode_pembayaran ?? $s->payment_method ?? '');
+                                return in_array($m, ['qris', 'transfer']);
+                            })->count() }}
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -244,7 +261,12 @@
                     </div>
                     <div>
                         <span class="text-muted small d-block">Pembayaran Tunai</span>
-                        <h5 class="fw-bold mb-0 text-dark">{{ $sales->whereIn('metode_pembayaran', ['tunai', 'cash', 'TUNAI', 'CASH'])->count() }}</h5>
+                        <h5 class="fw-bold mb-0 text-dark">
+                            {{ $sales->filter(function($s) {
+                                $m = strtolower($s->metode_pembayaran ?? $s->payment_method ?? '');
+                                return in_array($m, ['cash', 'tunai']);
+                            })->count() }}
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -312,6 +334,15 @@
                     </thead>
                     <tbody>
                     @forelse($sales as $sale)
+                        @php 
+                            // Kalkulasi total pembayaran otomatis apabila transaksi masih status OPEN
+                            $calculatedTotal = ($sale->status === 'COMPLETED' && $sale->total_pembayaran > 0) 
+                                ? $sale->total_pembayaran 
+                                : $sale->itemPenjualan->sum('subtotal');
+
+                            $metode = strtolower($sale->metode_pembayaran ?? $sale->payment_method ?? 'cash');
+                            $status = strtolower($sale->status ?? 'open');
+                        @endphp
                         <tr class="sale-row">
                             <td class="ps-4 text-muted small fw-medium">
                                 {{ method_exists($sales, 'firstItem') ? $sales->firstItem() + $loop->index : $loop->iteration }}
@@ -328,49 +359,47 @@
                                 </span>
                             </td>
                             <td class="fw-bold text-dark">
-                                Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
+                                Rp {{ number_format($calculatedTotal, 0, ',', '.') }}
                             </td>
                             <td>
-                                @php $metode = strtolower($sale->metode_pembayaran); @endphp
                                 @if(in_array($metode, ['qris', 'transfer']))
                                     <span class="badge badge-soft-sky px-3 py-1 rounded-pill fw-semibold">
-                                        <i class="bi bi-qr-code-scan me-1"></i>{{ strtoupper($sale->metode_pembayaran) }}
+                                        <i class="bi bi-qr-code-scan me-1"></i>{{ strtoupper($metode) }}
                                     </span>
                                 @else
                                     <span class="badge badge-soft-green px-3 py-1 rounded-pill fw-semibold">
-                                        <i class="bi bi-cash-stack me-1"></i>{{ ucfirst($sale->metode_pembayaran) }}
+                                        <i class="bi bi-cash-stack me-1"></i>{{ strtoupper($metode) }}
                                     </span>
                                 @endif
                             </td>
                             <td>
-                                @php $status = strtolower($sale->status ?? 'selesai'); @endphp
-                                @if(in_array($status, ['selesai', 'success', 'lunas']))
+                                @if(in_array($status, ['completed', 'selesai', 'success', 'lunas']))
                                     <span class="badge badge-soft-emerald px-3 py-1 rounded-pill fw-semibold">
-                                        <i class="bi bi-check-circle-fill me-1"></i>{{ ucfirst($status) }}
+                                        <i class="bi bi-check-circle-fill me-1"></i>Selesai
                                     </span>
-                                @elseif(in_array($status, ['pending', 'proses']))
-                                    <span class="badge badge-soft-amber px-3 py-1 rounded-pill fw-semibold">
-                                        <i class="bi bi-clock-history me-1"></i>{{ ucfirst($status) }}
+                                @elseif(in_array($status, ['open', 'pending', 'proses']))
+                                    <span class="badge badge-soft-rose px-3 py-1 rounded-pill fw-semibold">
+                                        <i class="bi bi-clock-history me-1"></i>Open
                                     </span>
                                 @else
-                                    <span class="badge badge-soft-rose px-3 py-1 rounded-pill fw-semibold">
-                                        <i class="bi bi-x-circle-fill me-1"></i>{{ ucfirst($status) }}
+                                    <span class="badge badge-soft-amber px-3 py-1 rounded-pill fw-semibold">
+                                        <i class="bi bi-exclamation-circle-fill me-1"></i>{{ ucfirst($status) }}
                                     </span>
                                 @endif
                             </td>
                             <td class="pe-4 text-end">
                                 <div class="d-flex justify-content-end gap-2">
-                                    {{-- DETAIL / STRUUK --}}
+                                    {{-- DETAIL / STRUK --}}
                                     <a href="{{ route('penjualan.show', $sale) }}" class="btn btn-action-info rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;" title="Lihat Struk / Detail">
                                         <i class="bi bi-receipt"></i>
                                     </a>
 
-                                    {{-- EDIT --}}
-                                    @can('update', $sale)
-                                        <a href="{{ route('penjualan.edit', $sale) }}" class="btn btn-action-edit rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;" title="Edit Transaksi">
-                                            <i class="bi bi-pencil-fill"></i>
+                                    {{-- EDIT / KASIR POS --}}
+                                    @if($sale->status === 'OPEN')
+                                        <a href="{{ route('penjualan.edit', $sale) }}" class="btn btn-action-edit rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;" title="Lanjutkan Pembayaran">
+                                            <i class="bi bi-cart-check-fill"></i>
                                         </a>
-                                    @endcan
+                                    @endif
 
                                     {{-- DELETE --}}
                                     @can('delete', $sale)

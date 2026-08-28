@@ -375,7 +375,7 @@
                     </div>
                 </div>
                 <h1 class="fw-bold text-white mb-2 fs-2">
-                    Selamat Datang Di POS Vlyhadi
+                    Selamat Datang Di POS Rijal
                 </h1>
                 <p class="text-white-50 mb-0">Berikut adalah ringkasan aktivitas transaksi, inventaris, dan performa toko Anda.</p>
             </div>

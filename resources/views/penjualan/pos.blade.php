@@ -9,12 +9,11 @@
 <style>
     /* Palette & Base Styling */
     :root {
-    --green-main: #22c55e;
-    --green-dark: #15803d;
-    --green-light: #4ade80;
-    --green-soft: #dcfce7;
-    --bg-slate: #f8fafc;
-
+        --green-main: #22c55e;
+        --green-dark: #15803d;
+        --green-light: #4ade80;
+        --green-soft: #dcfce7;
+        --bg-slate: #f8fafc;
     }
 
     body {
@@ -24,13 +23,13 @@
 
     /* Banner Gradient POS Header */
     .banner-green-gradient {
-    background: linear-gradient(
-        135deg,
-        var(--green-dark) 0%,
-        var(--green-main) 50%,
-        var(--green-light) 100%
-    ) !important;
-    color: #ffffff !important;
+        background: linear-gradient(
+            135deg,
+            var(--green-dark) 0%,
+            var(--green-main) 50%,
+            var(--green-light) 100%
+        ) !important;
+        color: #ffffff !important;
     }
 
     /* Card Styling */
@@ -56,10 +55,10 @@
     }
 
     .product-select-btn:hover {
-    border-color: #22c55e;
-    background-color: #f0fdf4;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.12);
+        border-color: #22c55e;
+        background-color: #f0fdf4;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.12);
     }
 
     /* Search Box Focus State */
@@ -76,9 +75,9 @@
 
     /* Badges & Soft Color Elements */
     .badge-soft-green {
-    background-color: #dcfce7 !important;
-    color: #15803d !important;
-    border: 1px solid #bbf7d0 !important;
+        background-color: #dcfce7 !important;
+        color: #15803d !important;
+        border: 1px solid #bbf7d0 !important;
     }
 
     /* Action Delete Soft */
@@ -96,16 +95,16 @@
 
     /* Checkout Banner / Receipt Box */
     .total-receipt-box {
-    background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
-    border: 1px dashed #86efac;
-    border-radius: 12px;
+        background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
+        border: 1px dashed #86efac;
+        border-radius: 12px;
     }
 
-/* QRIS Custom Box */
-.qris-card {
-    background: #ffffff;
-    border: 2px dashed #22c55e;
-    border-radius: 16px;
+    /* QRIS Custom Box */
+    .qris-card {
+        background: #ffffff;
+        border: 2px dashed #22c55e;
+        border-radius: 16px;
     }
 </style>
 
@@ -131,7 +130,7 @@
     @endif
 
     {{-- HEADER BANNER GRADIENT --}}
-    <div class="banner-purple-gradient p-4 p-md-5 rounded-4 mb-4 position-relative overflow-hidden shadow-sm">
+    <div class="banner-green-gradient p-4 p-md-5 rounded-4 mb-4 position-relative overflow-hidden shadow-sm">
         <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 position-relative" style="z-index: 1;">
             <div>
                 <h2 class="fw-bold mb-1 text-white d-flex align-items-center gap-2">
@@ -140,7 +139,7 @@
                 <p class="text-white opacity-75 small mb-0">Pilih item barang di sebelah kiri dan kelola keranjang belanja di sebelah kanan.</p>
             </div>
             <div class="d-flex gap-2">
-                <a href="{{ route('penjualan.index') }}" class="btn btn-light rounded-pill px-4 shadow-sm fw-semibold d-inline-flex align-items-center gap-2" style="color: #7c3aed !important;">
+                <a href="{{ route('penjualan.index') }}" class="btn btn-light rounded-pill px-4 shadow-sm fw-semibold d-inline-flex align-items-center gap-2" style="color: #15803d !important;">
                     <i class="bi bi-arrow-left"></i>
                     <span>Riwayat Transaksi</span>
                 </a>
@@ -204,7 +203,7 @@
                                                              class="rounded-3 shadow-sm border"
                                                              style="width:48px; height:48px; object-fit:cover;">
                                                     @else
-                                                        <div class="rounded-3 shadow-sm d-flex align-items-center justify-content-center bg-light fw-bold" style="width:48px; height:48px; color: #7c3aed;">
+                                                        <div class="rounded-3 shadow-sm d-flex align-items-center justify-content-center bg-light fw-bold" style="width:48px; height:48px; color: #15803d;">
                                                             <i class="bi bi-box-seam fs-5"></i>
                                                         </div>
                                                     @endif
@@ -228,8 +227,8 @@
                                             <div class="col-2 col-sm-2 text-end">
                                                <button type="submit" 
                                                         class="btn btn-sm text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm {{ $sale->status === 'COMPLETED' ? 'disabled' : '' }}" 
-                                                            style="width: 36px; height: 36px; background: linear-gradient(135deg, #15803d 0%, #22c55e 100%);" 
-                                                                title="Tambah ke Keranjang">
+                                                        style="width: 36px; height: 36px; background: linear-gradient(135deg, #15803d 0%, #22c55e 100%);" 
+                                                        title="Tambah ke Keranjang">
                                                     <i class="bi bi-plus-lg fw-bold"></i>
                                                 </button>
                                             </div>
@@ -255,7 +254,7 @@
                     <div class="card-header bg-white border-0 pt-4 px-4 pb-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
-                                <i class="bi bi-cart3" style="color: #7c3aed;"></i> Keranjang
+                                <i class="bi bi-cart3" style="color: #15803d;"></i> Keranjang
                                 <span class="badge rounded-pill bg-danger fs-6 fw-normal px-2" style="font-size: 0.75rem !important;">
                                     {{ $sale->itemPenjualan->sum('kuantitas') }} Item
                                 </span>
@@ -282,10 +281,12 @@
                                 @forelse($sale->itemPenjualan as $item)
                                 <tr>
                                     <td class="ps-4">
-                                        <span class="fw-semibold text-dark small d-block">{{ $item->produk->nama }}</span>
+                                        <span class="fw-semibold text-dark small d-block">
+                                            {{ $item->produk?->nama ?? 'Produk Dihapus' }}
+                                        </span>
                                     </td>
                                     <td class="text-muted small">
-                                        Rp {{ number_format($item->produk->harga_jual, 0, ',', '.') }}
+                                        Rp {{ number_format($item->produk?->harga_jual ?? 0, 0, ',', '.') }}
                                     </td>
                                     <td>
                                         <form method="POST" action="{{ route('itempenjualan.update', $item->id) }}">
@@ -301,7 +302,7 @@
                                                    {{ $sale->status === 'COMPLETED' ? 'disabled' : '' }}>
                                         </form>
                                     </td>
-                                    <td class="fw-bold small" style="color: #7c3aed;">
+                                    <td class="fw-bold small" style="color: #15803d;">
                                         Rp {{ number_format($item->subtotal, 0, ',', '.') }}
                                     </td>
                                     <td class="pe-4 text-end">
@@ -333,7 +334,7 @@
                 <div class="card-footer bg-white border-0 p-4 border-top">
                     <div class="total-receipt-box p-3 mb-3 text-center">
                         <span class="text-muted small text-uppercase fw-semibold d-block mb-1">Total Pembayaran</span>
-                        <h2 class="fw-bold mb-0" style="color: #6d28d9;">
+                        <h2 class="fw-bold mb-0" style="color: #15803d;">
                             Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
                         </h2>
                     </div>
@@ -392,7 +393,7 @@
 <div class="modal fade" id="qrisModal" tabindex="-1" aria-labelledby="qrisModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
-            <div class="modal-header text-white border-0 py-3" style="background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);">
+            <div class="modal-header text-white border-0 py-3" style="background: linear-gradient(135deg, #15803d 0%, #22c55e 100%);">
                 <h5 class="modal-title fw-bold d-flex align-items-center gap-2" id="qrisModalLabel">
                     <i class="bi bi-qr-code-scan"></i> Pembayaran QRIS
                 </h5>
@@ -411,7 +412,7 @@
                     </div>
                 </div>
 
-                <div class="text-dark fw-bold fs-4 mb-1" style="color: #6d28d9 !important;">
+                <div class="text-dark fw-bold fs-4 mb-1" style="color: #15803d !important;">
                     Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
                 </div>
                 
