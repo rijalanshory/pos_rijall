@@ -684,6 +684,26 @@ Penjualan
 
 
 
+
+<li class="nav-item">
+
+
+<a class="nav-link-custom {{ Request::is('tentang-saya*')?'active':'' }}"
+href="{{ url('/tentang-saya') }}">
+
+
+<i class="bi bi-info-circle-fill"></i>
+
+Tentang Saya
+
+
+</a>
+
+
+</li>
+
+
+
 </ul>
 
 

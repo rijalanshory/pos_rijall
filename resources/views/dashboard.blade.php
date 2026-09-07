@@ -85,40 +85,20 @@
 
     /* CARDS & HOVER EFFECTS */
     .dashboard-card {
+        border-radius: 22px;
+        border: 1px solid rgba(226,232,240,.8);
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        transition: .35s;
+        box-shadow: 0 15px 35px rgba(15,23,42,.08);
+        position: relative;
+        overflow: hidden;
+    }
 
-    border-radius:22px;
-
-    border:1px solid rgba(226,232,240,.8);
-
-    background:
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #f8fafc
-    );
-
-    transition:.35s;
-
-    box-shadow:
-    0 15px 35px rgba(15,23,42,.08);
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-
-.dashboard-card:hover {
-
-    transform: translateY(-8px);
-
-    box-shadow:
-    0 25px 50px rgba(34,197,94,.18);
-
-    border-color:
-    rgba(34,197,94,.35);
-
-}
+    .dashboard-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px rgba(34,197,94,.18);
+        border-color: rgba(34,197,94,.35);
+    }
 
     .card-top-accent {
         position: absolute;
@@ -145,9 +125,8 @@
     }
 
     .bg-green-subtle-custom {
-    background-color: var(--green-soft) !important;
-    color: var(--green-text) !important;
-
+        background-color: var(--green-soft) !important;
+        color: var(--green-text) !important;
     }
 
     .section-title {
@@ -220,142 +199,70 @@
     }
     
     /* PREMIUM CARD LIGHT EFFECT */
-
-.dashboard-card::before {
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-        120deg,
-        rgba(34,197,94,.12),
-        transparent 45%
-    );
-
-    opacity:0;
-
-    transition:.4s;
-
-}
-
-
-.dashboard-card:hover::before {
-
-    opacity:1;
-
-}
-
-
-
-/* ICON PREMIUM */
-
-.icon-box-modern {
-
-    box-shadow:
-    0 8px 20px rgba(34,197,94,.15);
-
-}
-
-
-
-/* HEADER GLOW */
-
-.dashboard-header-banner::before {
-
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-
-    height:220px;
-
-    background:
-    rgba(34,197,94,.25);
-
-    filter:blur(60px);
-
-    right:80px;
-
-    bottom:-80px;
-
-}
-
-
-
-/* BUTTON LEBIH PREMIUM */
-
-.btn-quick-action {
-
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.15);
-
-}
-
-
-.btn-quick-action:hover {
-
-    transform:
-    translateY(-4px)
-    scale(1.03);
-
-}
-
-
-
-/* TABLE ROW MODERN */
-
-.table-custom tbody tr:hover {
-
-    background:
-    rgba(34,197,94,.05);
-
-}
-
-
-
-/* EMPTY DATA */
-
-.table-custom .text-center i {
-
-    opacity:.7;
-
-}
-
-
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .dashboard-header-banner {
-
-        padding:1.5rem;
-
+    .dashboard-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(34,197,94,.12), transparent 45%);
+        opacity: 0;
+        transition: .4s;
     }
 
-
-    .dashboard-header-banner h1 {
-
-        font-size:1.5rem!important;
-
+    .dashboard-card:hover::before {
+        opacity: 1;
     }
 
-
-    .dashboard-card {
-
-        border-radius:18px;
-
+    /* ICON PREMIUM */
+    .icon-box-modern {
+        box-shadow: 0 8px 20px rgba(34,197,94,.15);
     }
 
-}
+    /* HEADER GLOW */
+    .dashboard-header-banner::before {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        background: rgba(34,197,94,.25);
+        filter: blur(60px);
+        right: 80px;
+        bottom: -80px;
+    }
 
+    /* BUTTON LEBIH PREMIUM */
+    .btn-quick-action {
+        box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    }
+
+    .btn-quick-action:hover {
+        transform: translateY(-4px) scale(1.03);
+    }
+
+    /* TABLE ROW MODERN */
+    .table-custom tbody tr:hover {
+        background: rgba(34,197,94,.05);
+    }
+
+    /* EMPTY DATA */
+    .table-custom .text-center i {
+        opacity: .7;
+    }
+
+    /* MOBILE */
+    @media(max-width:768px){
+        .dashboard-header-banner {
+            padding: 1.5rem;
+        }
+
+        .dashboard-header-banner h1 {
+            font-size: 1.5rem !important;
+        }
+
+        .dashboard-card {
+            border-radius: 18px;
+        }
+    }
 </style>
-
 
 <div class="container py-4">
 
@@ -391,7 +298,6 @@
             </div>
         </div>
     </div>
-
 
     {{-- SALES OVERVIEW (ADMIN/OWNER ONLY) --}}
     @can('viewAny', App\Models\User::class)
@@ -497,7 +403,6 @@
 
     @endcan
 
-
     {{-- PRODUK TERLARIS & PUSAT KENDALI OPERASIONAL KASIR --}}
     <div class="row g-4 mb-4">
         <div class="col-lg-8">
@@ -593,7 +498,7 @@
                             <span class="text-muted small">Status Peran:</span>
                             <span class="badge bg-primary-subtle text-primary fw-semibold text-capitalize">
                                 @if(is_object(auth()->user()->role))
-                                    {{ optional(auth()->user()->role)->name ?? '' ?? 'Petugas' }}
+                                    {{ optional(auth()->user()->role)->name ?? 'Petugas' }}
                                 @else
                                     {{ auth()->user()->role ?? 'Petugas' }}
                                 @endif
@@ -613,7 +518,6 @@
             </div>
         </div>
     </div>
-
 
     {{-- STATS RINGKASAN PRODUK & INVENTARIS --}}
     <div class="d-flex align-items-center justify-content-between mb-3">
